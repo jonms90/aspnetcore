@@ -40,7 +40,8 @@ function Test-Template($templateName, $templateArgs, $templateNupkg, $isSPA) {
         $projContent | Set-Content $proj
         dotnet.exe ef migrations add mvc
         dotnet.exe publish --configuration Release
-        dotnet.exe bin\Release\net6.0\publish\$templateName.dll
+        Set-Location .\bin\Release\net6.0\publish
+        Invoke-Expression "./$templateName.exe"
     }
     finally {
         Pop-Location
